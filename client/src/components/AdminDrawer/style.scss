@@ -1,0 +1,13 @@
+#admin {
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  .content {
+    display: flex;
+    padding: 16px 24px;
+    flex-grow: 1;
+    transition: 250ms ease-out 1ms;
+  }
+}

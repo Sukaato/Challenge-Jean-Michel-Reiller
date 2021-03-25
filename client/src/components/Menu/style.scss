@@ -1,0 +1,10 @@
+.app-menu {
+  .app-menu_top {
+    display: flex;
+    align-items: center;
+
+    > .app-menu_top-title {
+      padding-right: 16px;
+    }
+  }
+}
