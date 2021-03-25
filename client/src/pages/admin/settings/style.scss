@@ -1,0 +1,14 @@
+#admin-settings {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  .admin-settings_title {
+    text-align: center;
+  }
+
+  .admin-settings_content {
+    flex-grow: 1;
+    display: grid;
+  }
+}

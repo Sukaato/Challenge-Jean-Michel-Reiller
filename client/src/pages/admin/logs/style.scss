@@ -1,0 +1,14 @@
+#admin-logs {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  .admin-logs_title {
+    text-align: center;
+  }
+
+  .admin-logs_content {
+    flex-grow: 1;
+    display: grid;
+  }
+}

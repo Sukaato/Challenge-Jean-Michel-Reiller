@@ -1,0 +1,14 @@
+#admin-results {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  .admin-results_title {
+    text-align: center;
+  }
+
+  .admin-results_content {
+    flex-grow: 1;
+    display: grid;
+  }
+}

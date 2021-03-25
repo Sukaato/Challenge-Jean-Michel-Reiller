@@ -1,0 +1,18 @@
+#admin-home {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  .admin-home_title {
+    text-align: center;
+  }
+
+  .admin-home_content {
+    flex-grow: 1;
+    display: grid;
+
+    .grid {
+      margin: auto;
+    }
+  }
+}

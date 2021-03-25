@@ -1,0 +1,14 @@
+#admin-teams {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  .admin-teams_title {
+    text-align: center;
+  }
+
+  .admin-teams_content {
+    flex-grow: 1;
+    display: grid;
+  }
+}
