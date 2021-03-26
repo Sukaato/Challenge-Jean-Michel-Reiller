@@ -10,5 +10,18 @@
   .admin-settings_content {
     flex-grow: 1;
     display: grid;
+    margin-top: 48px;
+
+    .card {
+      > .card_content {
+        > div {
+          margin-bottom: 36px;
+        }
+
+        .fields {
+          margin-top: 16px;
+        }
+      }
+    }
   }
 }
