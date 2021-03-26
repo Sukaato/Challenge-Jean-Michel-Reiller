@@ -9,6 +9,40 @@
 
   .admin-results_content {
     flex-grow: 1;
-    display: grid;
+    margin-top: 16px;
+
+    > .admin-results_content-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 12px;
+    }
+  }
+
+  .admin-results_modal {
+    z-index: 10000;
+
+    .admin-results_modal-content {
+      width: 100vw;
+      height: 100vh;
+
+      padding: 16px 32px;
+    }
+
+    .admin-results_modal-info {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 32px;
+    }
+
+    .admin-results_modal-table {
+      width: 100%;
+
+      th, td {
+        font-size: 24px;
+      }
+    }
   }
 }
