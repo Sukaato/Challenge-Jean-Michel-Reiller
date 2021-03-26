@@ -16,8 +16,8 @@ export function AdminHomePage () {
       <div className='admin-home_content'>
         <Grid 
           container 
-          lg={10} 
-          spacing={5} 
+          lg={9} 
+          spacing={7} 
           direction='row' 
           justify='center' 
           alignItems='center'
