@@ -9,6 +9,13 @@
 
   .admin-teams_content {
     flex-grow: 1;
-    display: grid;
+    margin-top: 16px;
+
+    > .admin-teams_content-info {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding-bottom: 12px;
+    }
   }
 }

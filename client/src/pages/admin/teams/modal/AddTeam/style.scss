@@ -1,0 +1,23 @@
+.add-team_modal-title {
+  text-align: center;
+}
+
+#add-team_modal {
+  padding: 8px 32px 16px;
+  display: flex;
+  flex-direction: column;
+
+  .add-team_fields {
+    margin-top: 24px;
+  }
+
+  .add-team_controls {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 24px;
+
+    #add-team_controls-cancel {
+      margin-right: 12px;
+    }
+  }
+}
