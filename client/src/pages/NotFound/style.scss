@@ -1,8 +1,17 @@
-#notFound {
-  padding: 16px;
-  min-width: 320px;
-  border-radius: 5px;
-  width: 50%;
-  background-color: #1e2127;
-  text-align: center;
+#app-not-found {
+  padding: 32px 16px;
+
+  .app-not-found_img-container {
+    width: 90%;
+    max-width: 650px;
+    margin: auto;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  #app-not-found_back {
+    margin-left: auto;
+  }
 }

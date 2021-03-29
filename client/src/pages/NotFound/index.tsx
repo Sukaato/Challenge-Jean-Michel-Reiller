@@ -1,11 +1,30 @@
+import { Button, Card, CardActions, CardContent, Container, Typography } from '@material-ui/core';
+import { ArrowBack } from '@material-ui/icons';
+import { useHistory } from 'react-router';
 import './style.scss';
 
 export function NotFound() {
+  const history = useHistory();
+
+  const handleBack = () => history.goBack();
+
 
   return (
-    <div id='notFound'>
-      <h1>NotFound</h1>
-      <p>La page demandé n'éxiste pas ou plu</p>
-    </div>
+    <Container id='app-not-found'>
+      <Card>
+        <CardContent>
+          <Typography variant='h2' component='h1'>Not Found</Typography>
+          <Typography paragraph>La page demandé n'éxiste pas ou plus</Typography>
+        </CardContent>
+        <CardActions>
+          <Button id='app-not-found_back' variant='contained' color='primary' startIcon={<ArrowBack />} onClick={handleBack}>
+            Revenir en arrière
+          </Button>
+        </CardActions>
+      </Card>
+      <div className='app-not-found_img-container'>
+        <img src='/assets/img/piscine.svg' alt='piscine' />
+      </div>
+    </Container>
   );
 }

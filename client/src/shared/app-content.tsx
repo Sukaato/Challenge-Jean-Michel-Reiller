@@ -6,25 +6,25 @@ export const appContent = {
       title: 'Résultats',
       description: 'Consulter les résultats des équipes',
       icon: <Equalizer />,
-      redirectTo: '/admin/results'
+      redirectTo: '/results'
     },
     teams: {
       title: 'Équipes',
       description: "Ajout, modification et suppression d'équipe",
       icon: <People />,
-      redirectTo: '/admin/teams'
+      redirectTo: '/teams'
     },
     settings: {
       title: 'Paramètres',
       description: 'Longueur de piscine, temps de session',
       icon: <Settings />,
-      redirectTo: '/admin/settings'
+      redirectTo: '/settings'
     },
     logs: {
       title: 'Logs',
       description: 'Consulter les actions des jurys',
       icon: <Storage />,
-      redirectTo: '/admin/logs'
+      redirectTo: '/logs'
     }
   }
 }
