@@ -1,6 +1,6 @@
 import { Container, List, ListItem, ListItemText, Paper } from '@material-ui/core';
 import { FC, useState } from 'react';
-import { JuryAppBar } from '../../../components/JuryAppBar';
+import { JuryHeader } from '../../../components/JuryHeader';
 import './style.scss';
 
 const data: any[] = [
@@ -21,7 +21,7 @@ export const JuryHomePage: FC = () => {
 
   return (
     <div id='app-jury_home'>
-      <JuryAppBar title='Challenge Jean-Michel Reiller' />
+      <JuryHeader title='Challenge Jean-Michel Reiller' />
       <Container>
         <List component='nav'>
           {teams.map((team, idx) => (

@@ -8,7 +8,7 @@ import { AdminLogsPage } from '../pages/admin/logs';
 import { AdminResultsPage } from '../pages/admin/results';
 import { AdminSettingsPage } from '../pages/admin/settings';
 import { AdminTeamsPage } from '../pages/admin/teams';
-import { JuryHomePage } from '../pages/jury/home';
+import { JuryHomePage } from '../pages/jury/Home';
 import { JuryTeamPage } from '../pages/jury/Team';
 import { NotFound } from '../pages/NotFound';
 import { theme } from '../shared/mui-theme';

@@ -8,12 +8,12 @@ import './style.scss';
 
 
 
-interface MenuProps {
+interface Props {
   isOpen: boolean;
   onPressClose: () => void;
 }
 
-export const Menu: FC<MenuProps> = ({ isOpen, onPressClose }) => {
+export const Menu: FC<Props> = ({ isOpen, onPressClose }) => {
   return (
     <Drawer variant='persistent' anchor='left' open={isOpen} className='app-menu'>
       <div className='app-menu_top'>

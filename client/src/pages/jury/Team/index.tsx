@@ -1,7 +1,7 @@
 import { Container, IconButton, Paper, Typography } from '@material-ui/core';
 import { Add, Remove } from '@material-ui/icons';
 import { FC, useState } from 'react';
-import { JuryAppBar } from '../../../components/JuryAppBar';
+import { JuryHeader } from '../../../components/JuryHeader';
 import './style.scss';
 
 const data = {
@@ -34,7 +34,7 @@ export const JuryTeamPage: FC = () => {
 
   return (
     <div id='app-jury_team'>
-      <JuryAppBar title={team.name} />
+      <JuryHeader title={team.name} />
       <Container className='app-jury_team-content'>
         <Paper elevation={2} className='padding'>
           <div id='app-jury_team_longueur'>

@@ -2,14 +2,14 @@ import { ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import { FC } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 
-interface MenuItemProps {
+interface Props {
   title: string;
   redirectTo: string;
   icon: any;
 }
 
 
-export const MenuItem: FC<MenuItemProps> = ({ title, icon, redirectTo }) => {
+export const MenuItem: FC<Props> = ({ title, icon, redirectTo }) => {
   const location = useLocation();
   const history = useHistory();
 

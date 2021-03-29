@@ -4,14 +4,14 @@ import { useHistory } from 'react-router';
 
 import './style.scss';
 
-interface AdminCardProps {
+interface Props {
   icon: any;
   title: string;
   description: string;
   redirectTo: string;
 }
 
-export const AdminCard: FC<AdminCardProps> = ({ title, icon, description, redirectTo }) => {
+export const AdminCard: FC<Props> = ({ title, icon, description, redirectTo }) => {
   const history = useHistory();
 
   const handleClick = () => history.push(redirectTo);

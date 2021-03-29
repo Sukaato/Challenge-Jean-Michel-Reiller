@@ -8,7 +8,7 @@ interface Props {
   title: string;
 }
 
-export const JuryAppBar: FC<Props> = ({ title }) => {
+export const JuryHeader: FC<Props> = ({ title }) => {
   return (
     <>
       <AppBar className='app-jury_toolbar'>

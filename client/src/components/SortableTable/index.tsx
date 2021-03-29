@@ -39,7 +39,7 @@ interface Action {
   handle: (row: Row, idx: number) => void;
 }
 
-interface SortableListProps {
+interface Props {
   columns: Column[];
   rows: Row[];
   classes?: string;
@@ -48,7 +48,7 @@ interface SortableListProps {
   noDefaultText?: boolean;
 }
 
-export const SortableTable: FC<SortableListProps> = ({ columns, rows, classes, actions = [], deleteAction, noDefaultText = false }) => {
+export const SortableTable: FC<Props> = ({ columns, rows, classes, actions = [], deleteAction, noDefaultText = false }) => {
   const [ page, setPage ] = useState<number>(0);
   const [ rowsPerPage, setRowsPerPage ] = useState<number>(10);
 

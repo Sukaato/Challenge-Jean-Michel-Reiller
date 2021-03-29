@@ -3,11 +3,11 @@ import { GitHub, Menu } from '@material-ui/icons';
 import { FC } from 'react';
 import './style.scss';
 
-interface HeaderProps {
+interface Props {
   onPressMenu: () => void;
 }
 
-export const Header: FC<HeaderProps> = ({ onPressMenu }) => {
+export const AdminHeader: FC<Props> = ({ onPressMenu }) => {
   return (
     <AppBar position='static' id='app-header'>
       <Toolbar variant='dense'>

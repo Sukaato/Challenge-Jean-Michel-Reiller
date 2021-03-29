@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import './style.scss';
 
-export const WaterMark : FC = () => {
+export const WaterMark: FC = () => {
   return (
     <footer id='water-mark'>
       <p>

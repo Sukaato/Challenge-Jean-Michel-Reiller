@@ -1,6 +1,6 @@
 import { Container } from '@material-ui/core';
 import { FC, useState } from 'react';
-import { Header } from '../Header';
+import { AdminHeader } from '../AdminHeader';
 import { Menu } from '../Menu';
 
 import './style.scss';
@@ -16,7 +16,7 @@ export const AdminDrawer: FC = ({ children }) => {
 
   return (
     <div id='admin'>
-      <Header onPressMenu={handleOpenAction} />
+      <AdminHeader onPressMenu={handleOpenAction} />
       <Menu isOpen={isOpen} onPressClose={handleCloseAction} />
       <Container maxWidth={maxWidth} className={`content ${opened}`}>
         <>{children}</>
