@@ -1,4 +1,4 @@
-import { Backdrop, Button, IconButton, Paper, Typography } from '@material-ui/core';
+import { Backdrop, Breadcrumbs, Button, IconButton, Link, Paper, Typography } from '@material-ui/core';
 import { Close, Fullscreen } from '@material-ui/icons';
 import { useEffect, useState } from 'react';
 import { Column, Row, SortableTable } from '../../../components/SortableTable';
@@ -38,7 +38,10 @@ export function AdminResultsPage () {
 
   return (
     <div id='admin-results'>
-      <Typography variant='h3' component='h2' className='admin-results_title'>Admin - Résultats</Typography>
+      <Breadcrumbs className='admin-results_title'>
+        <Link href='/'>Admin</Link>
+        <Typography>Resultats</Typography>
+      </Breadcrumbs>
       <div className='admin-results_content'>
         <div className='admin-results_content-info'>
           <Typography variant='body1'>Temps restant: {time}</Typography>

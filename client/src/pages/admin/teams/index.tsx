@@ -1,4 +1,4 @@
-import { Button, Typography } from '@material-ui/core';
+import { Breadcrumbs, Button, Link, Typography } from '@material-ui/core';
 import { Add, Create } from '@material-ui/icons';
 import { useEffect, useState } from 'react';
 import { Column, Row, SortableTable } from '../../../components/SortableTable';
@@ -45,7 +45,10 @@ export function AdminTeamsPage () {
 
   return (
     <div id='admin-teams'>
-      <Typography variant='h3' component='h2' className='admin-teams_title'>Admin - Équipes</Typography>
+      <Breadcrumbs className='admin-teams_title'>
+        <Link href='/'>Admin</Link>
+        <Typography>Équipes</Typography>
+      </Breadcrumbs>
       <div className='admin-teams_content'>
         <div className='admin-teams_content-info'>
           <Button variant='outlined' color='secondary' startIcon={<Add />} onClick={handleOpenModalAdd}>ajouter</Button>

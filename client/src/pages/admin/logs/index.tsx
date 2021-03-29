@@ -1,4 +1,4 @@
-import { Typography } from '@material-ui/core';
+import { Breadcrumbs, Link, Typography } from '@material-ui/core';
 import { useEffect, useState } from 'react';
 import { Column, Row, SortableTable } from '../../../components/SortableTable';
 import './style.scss';
@@ -29,7 +29,10 @@ export function AdminLogsPage () {
 
   return (
     <div id='admin-logs'>
-      <Typography variant='h3' component='h2' className='admin-logs_title'>Admin - Logs</Typography>
+      <Breadcrumbs className='admin-logs_title'>
+        <Link href='/'>Admin</Link>
+        <Typography>Logs</Typography>
+      </Breadcrumbs>
       <div className='admin-logs_content'>
         <SortableTable columns={columns} rows={logs} deleteAction={handleDeleteRow} noDefaultText />
       </div>

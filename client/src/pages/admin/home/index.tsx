@@ -1,4 +1,4 @@
-import { Grid, Typography } from '@material-ui/core';
+import { Breadcrumbs, Grid, Typography } from '@material-ui/core';
 import { useEffect } from 'react';
 import { AdminCard } from '../../../components/AdminCard';
 import { appContent } from '../../../shared/app-content';
@@ -12,7 +12,9 @@ export function AdminHomePage () {
 
   return (
     <div id='admin-home'>
-      <Typography variant='h3' component='h2' className='admin-home_title'>Admin</Typography>
+      <Breadcrumbs className='admin-home_title'>
+        <Typography variant='h3' component='h2'>Admin</Typography>
+      </Breadcrumbs>
       <div className='admin-home_content'>
         <Grid 
           container 

@@ -1,4 +1,4 @@
-import { Card, CardContent, TextField, Typography } from '@material-ui/core';
+import { Breadcrumbs, Card, CardContent, Link, TextField, Typography } from '@material-ui/core';
 import { useEffect, useState } from 'react';
 import './style.scss';
 
@@ -16,7 +16,10 @@ export function AdminSettingsPage () {
 
   return (
     <div id='admin-settings'>
-      <Typography variant='h3' component='h2' className='admin-settings_title'>Admin - Paramètres</Typography>
+    <Breadcrumbs className='admin-settings_title'>
+      <Link href='/'>Admin</Link>
+      <Typography>Paramètres</Typography>
+    </Breadcrumbs>
       <div className='admin-settings_content'>
         <Card className='card' elevation={3}>
           <CardContent className='card_content'>
