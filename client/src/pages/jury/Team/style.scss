@@ -1,0 +1,41 @@
+#app-jury_team {
+  padding: 16px;
+
+  .app-jury_team-content {
+    margin: auto;
+    max-width: 580px;
+
+    .padding {
+      padding: 8px 16px;
+    }
+
+    #app-jury_team_longueur {
+      padding-bottom: 16px;
+
+      .data {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 8px;
+        transition: background-color 100ms ease-in 0ms;
+
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.103);
+        }
+      }
+    }
+
+    #app-jury_team-controls {
+      margin-top: 32px;
+      text-align: center;
+
+      .data {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+      }
+    }
+  }
+}

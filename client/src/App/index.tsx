@@ -6,11 +6,13 @@ import { AdminLogsPage } from '../pages/admin/logs';
 import { AdminResultsPage } from '../pages/admin/results';
 import { AdminSettingsPage } from '../pages/admin/settings';
 import { AdminTeamsPage } from '../pages/admin/teams';
+import { JuryHomePage } from '../pages/jury/home';
+import { JuryTeamPage } from '../pages/jury/Team';
 import { NotFound } from '../pages/NotFound';
 import { theme } from '../shared/mui-theme';
 import './style.scss';
 
-const isLocalhost = true;
+const isLocalhost = false;
 
 export function App() {
   return (
@@ -20,14 +22,16 @@ export function App() {
           <Route path='/' exact>
             <Redirect to={isLocalhost ? '/admin' : '/jury'} />
           </Route>
-          <AdminDrawer>
+          {isLocalhost ? <AdminDrawer>
             <Route path='/admin' exact component={AdminHomePage} />
             <Route path='/admin/results' exact component={AdminResultsPage} />
             <Route path='/admin/teams' exact component={AdminTeamsPage} />
             <Route path='/admin/settings' exact component={AdminSettingsPage} />
             <Route path='/admin/logs' exact component={AdminLogsPage} />
-          </AdminDrawer>
-          <Route path='/jury' exact component={AdminHomePage} />
+          </AdminDrawer> : <>
+            <Route path='/jury' exact component={JuryHomePage} />
+            <Route path='/jury/:team' exact component={JuryTeamPage} />
+          </> }
           <Route path='*' component={NotFound} />
         </Switch>
       </Router>
