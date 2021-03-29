@@ -45,9 +45,10 @@ interface SortableListProps {
   classes?: string;
   actions?: Action[];
   deleteAction?: (row: Row, idx: number) => void;
+  noDefaultText?: boolean;
 }
 
-export const SortableTable: FC<SortableListProps> = ({ columns, rows, classes, actions = [], deleteAction }) => {
+export const SortableTable: FC<SortableListProps> = ({ columns, rows, classes, actions = [], deleteAction, noDefaultText = false }) => {
   const [ page, setPage ] = useState<number>(0);
   const [ rowsPerPage, setRowsPerPage ] = useState<number>(10);
 
@@ -101,11 +102,13 @@ export const SortableTable: FC<SortableListProps> = ({ columns, rows, classes, a
                 )}
               </TableRow>
             )) : <>
-              <TableRow>
-                <TableCell colSpan={columns.length + 1}>
-                  <Button color='secondary' href='/admin/teams' fullWidth>Ajouter une équipe</Button>
-                </TableCell>
-              </TableRow>
+              {!noDefaultText && (
+                <TableRow>
+                  <TableCell colSpan={columns.length + 1}>
+                    <Button color='secondary' href='/admin/teams' fullWidth>Ajouter une équipe</Button>
+                  </TableCell>
+                </TableRow>
+              )}
             </>
           }
           </TableBody>
