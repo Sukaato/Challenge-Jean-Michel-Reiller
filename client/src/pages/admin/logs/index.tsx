@@ -28,12 +28,12 @@ export function AdminLogsPage () {
   }, []);
 
   return (
-    <div id='admin-logs'>
-      <Breadcrumbs className='admin-logs_title'>
+    <div id='app-admin_logs'>
+      <Breadcrumbs id='app-admin_logs-title'>
         <Link href='/'>Admin</Link>
         <Typography>Logs</Typography>
       </Breadcrumbs>
-      <div className='admin-logs_content'>
+      <div id='app-admin_logs-content'>
         <SortableTable columns={columns} rows={logs} deleteAction={handleDeleteRow} noDefaultText />
       </div>
     </div>

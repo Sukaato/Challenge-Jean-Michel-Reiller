@@ -37,31 +37,31 @@ export function AdminResultsPage () {
   }, []);
 
   return (
-    <div id='admin-results'>
-      <Breadcrumbs className='admin-results_title'>
+    <div id='app-admin_results'>
+      <Breadcrumbs id='app-admin_results-title'>
         <Link href='/'>Admin</Link>
         <Typography>Resultats</Typography>
       </Breadcrumbs>
-      <div className='admin-results_content'>
-        <div className='admin-results_content-info'>
+      <div id='app-admin_results-content'>
+        <div id='app-admin_results-content_info'>
           <Typography variant='body1'>Temps restant: {time}</Typography>
           <Button variant='outlined' color='secondary' startIcon={<Fullscreen />} onClick={handleOpenFullScreen}>Plein écran</Button>
         </div>
-        <div className='admin-results_content-data'>
+        <div>
           <SortableTable columns={columns} rows={rows} />
         </div>
       </div>
 
       {isFullScreen && (
-        <Backdrop open={isFullScreen} className={`admin-results_modal`}>
-          <Paper className='admin-results_modal-content'>
-            <div className='admin-results_modal-info'>
+        <Backdrop open={true} id='app-admin_results-modal'>
+          <Paper id='app-admin_results-modal_content'>
+            <div id='app-admin_results-modal_content-info'>
               <Typography variant='h3' component='p'>Temps restant: {time}</Typography>
-              <IconButton className='admin-results_modal-close' onClick={handleCloseFullScreen} >
+              <IconButton onClick={handleCloseFullScreen} >
                 <Close fontSize='large' />
               </IconButton>
             </div>
-            <SortableTable columns={columns} rows={rows} classes='admin-results_modal-table' />
+            <SortableTable columns={columns} rows={rows} id='app-admin_results-modal_content-table' />
           </Paper>
         </Backdrop>
       )}

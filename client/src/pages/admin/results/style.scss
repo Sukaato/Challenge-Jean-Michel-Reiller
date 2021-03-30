@@ -1,20 +1,20 @@
-#admin-results {
+#app-admin_results {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
 
-  .admin-results_title {
+  &-title {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
   }
 
-  .admin-results_content {
+  &-content {
     flex-grow: 1;
     margin-top: 16px;
 
-    > .admin-results_content-info {
+    &_info {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -22,29 +22,28 @@
     }
   }
 
-  .admin-results_modal {
+  #app-admin_results-modal {
     z-index: 10000;
 
-    .admin-results_modal-content {
+    &_content {
       width: 100vw;
       height: 100vh;
-
       padding: 16px 32px;
-    }
 
-    .admin-results_modal-info {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-      padding-bottom: 32px;
-    }
+      &-info {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 32px;
+      }
 
-    .admin-results_modal-table {
-      width: 100%;
+      &-table {
+        width: 100%;
 
-      th, td {
-        font-size: 24px;
+        th, td {
+          font-size: 24px;
+        }
       }
     }
   }

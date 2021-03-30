@@ -13,6 +13,10 @@ const data = {
     lestTime: '2: 50.485',
   },
   objectif: 5000
+};
+
+function padStart(value: number): string {
+  return value.toString().padStart(2, '0');
 }
 
 export const JuryTeamPage: FC = () => {
@@ -20,6 +24,8 @@ export const JuryTeamPage: FC = () => {
   const [ longueur ] = useState<number>(50);
 
   const handleRemoveLongueur = () => setTeam(value => { 
+    if (value.longueur.effectuer === 0) return value;
+
     return {
       ...value, 
       longueur: { ...value.longueur, effectuer: value.longueur.effectuer - 1 }
@@ -35,37 +41,37 @@ export const JuryTeamPage: FC = () => {
   return (
     <div id='app-jury_team'>
       <JuryHeader title={team.name} />
-      <Container className='app-jury_team-content'>
+      <Container id='app-jury_team-content'>
         <Paper elevation={2} className='padding'>
-          <div id='app-jury_team_longueur'>
-            <Typography variant='h4' component='h2'>Longueur</Typography>
+          <div id='app-jury_team-content_data-longueur'>
+            <Typography variant='h5' component='h2'>Longueur</Typography>
             <div className='data padding'>
-              <Typography variant='body2'>Nombre effectuer</Typography>
-              <Typography variant='body2'>{team.longueur.effectuer}</Typography>
+              <Typography variant='body1'>Nombre effectuer</Typography>
+              <Typography variant='body1'>{padStart(team.longueur.effectuer)}</Typography>
             </div>
             <div className='data padding'>
-              <Typography variant='body2'>Meilleur temps</Typography>
-              <Typography variant='body2'>{team.longueur.bestTime}</Typography>
+              <Typography variant='body1'>Meilleur temps</Typography>
+              <Typography variant='body1'>{team.longueur.bestTime}</Typography>
             </div>
             <div className='data padding'>
-              <Typography variant='body2'>Dernier temps</Typography>
-              <Typography variant='body2'>{team.longueur.lestTime}</Typography>
+              <Typography variant='body1'>Dernier temps</Typography>
+              <Typography variant='body1'>{team.longueur.lestTime}</Typography>
             </div>
           </div>
-          <div id='app-jury_team_objectif'>
-            <Typography variant='h4' component='h2'>Objectif</Typography>
+          <div>
+            <Typography variant='h5' component='h2'>Objectif</Typography>
             <div className='data padding'>
-              <Typography variant='body2'>{team.objectif} m / {team.objectif / longueur} longueurs</Typography>
+              <Typography variant='body1'>{team.objectif} m / {team.objectif / longueur} longueurs</Typography>
             </div>
           </div>
         </Paper>
-        <div id='app-jury_team-controls'>
-          <Typography variant='h4' component='h2'>Gestion des longueurs</Typography>
+        <div id='app-jury_team-content_controls'>
+          <Typography variant='h5' component='h2'>Gestion des longueurs</Typography>
           <div className='data'>
             <IconButton onClick={handleRemoveLongueur}>
               <Remove fontSize='large' />
             </IconButton>
-            <Typography variant='h5' component='h3'>{team.longueur.effectuer}</Typography>
+            <Typography variant='h5' component='h3'>{padStart(team.longueur.effectuer)}</Typography>
             <IconButton onClick={handleAddLongueur}>
               <Add fontSize='large' />
             </IconButton>

@@ -11,20 +11,12 @@ export function AdminHomePage () {
   }, []);
 
   return (
-    <div id='admin-home'>
-      <Breadcrumbs className='admin-home_title'>
+    <div id='app-admin_home'>
+      <Breadcrumbs id='app-admin_home-title'>
         <Typography variant='h3' component='h2'>Admin</Typography>
       </Breadcrumbs>
-      <div className='admin-home_content'>
-        <Grid 
-          container 
-          lg={9} 
-          spacing={7} 
-          direction='row' 
-          justify='center' 
-          alignItems='center'
-          className='grid'
-        >
+      <div id='app-admin_home-content'>
+        <Grid container lg={9} spacing={7} direction='row' justify='center' alignItems='center' className='grid'>
           <Grid item md={5}>
             <AdminCard { ...appContent.tabs.results } />
           </Grid>

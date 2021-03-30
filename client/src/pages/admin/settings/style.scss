@@ -1,28 +1,28 @@
-#admin-settings {
+#app-admin_settings {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
 
-  .admin-settings_title {
+  &-title {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
   }
 
-  .admin-settings_content {
+  &-content {
     flex-grow: 1;
     display: grid;
     margin-top: 48px;
 
-    .card {
-      > .card_content {
+    &_card {
+      &-content {
         > div {
           margin-bottom: 36px;
         }
 
         .fields {
-          margin-top: 16px;
+          margin-top: 12px;
         }
       }
     }

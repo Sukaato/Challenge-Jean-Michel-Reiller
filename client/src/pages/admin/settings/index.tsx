@@ -15,15 +15,15 @@ export function AdminSettingsPage () {
   }, []);
 
   return (
-    <div id='admin-settings'>
-    <Breadcrumbs className='admin-settings_title'>
+    <div id='app-admin_settings'>
+    <Breadcrumbs id='app-admin_settings-title'>
       <Link href='/'>Admin</Link>
       <Typography>Paramètres</Typography>
     </Breadcrumbs>
-      <div className='admin-settings_content'>
-        <Card className='card' elevation={3}>
-          <CardContent className='card_content'>
-            <div id='piscine'>
+      <div id='app-admin_settings-content'>
+        <Card id='app-admin_settings-content_card' elevation={3}>
+          <CardContent className='app-admin_settings-content_card-content'>
+            <div>
               <Typography variant='h5' component='h4'>Piscine</Typography>
               <div className='fields'>
                 <TextField 
@@ -36,12 +36,12 @@ export function AdminSettingsPage () {
                 />
               </div>
             </div>
-            <div id='session'>
+            <div>
               <Typography variant='h5' component='h4'>Session</Typography>
               <div className='fields'>
                 <TextField 
                   style={{ width: '206px' }}
-                  label='Longueur en mètre'
+                  label='Durée'
                   id='session_time' 
                   type='time'
                   value={sessionTime} 

@@ -2,7 +2,7 @@ import { Breadcrumbs, Button, Link, Typography } from '@material-ui/core';
 import { Add, Create } from '@material-ui/icons';
 import { useEffect, useState } from 'react';
 import { Column, Row, SortableTable } from '../../../components/SortableTable';
-import { AddTeamModal } from './modal/AddTeam';
+import { CreateTeamModal } from './modal/CreateTeam';
 import { ModifyTeamModal } from './modal/ModifyTeam';
 import './style.scss';
 
@@ -44,23 +44,23 @@ export function AdminTeamsPage () {
   }, []);
 
   return (
-    <div id='admin-teams'>
-      <Breadcrumbs className='admin-teams_title'>
+    <div id='app-admin_teams'>
+      <Breadcrumbs id='app-admin_teams-title'>
         <Link href='/'>Admin</Link>
         <Typography>Équipes</Typography>
       </Breadcrumbs>
-      <div className='admin-teams_content'>
-        <div className='admin-teams_content-info'>
+      <div id='app-admin_teams-content'>
+        <div id='app-admin_teams-content_info'>
           <Button variant='outlined' color='secondary' startIcon={<Add />} onClick={handleOpenModalAdd}>ajouter</Button>
         </div>
-        <div className='admin-teams_content-data'>
+        <div>
           <SortableTable columns={columns} rows={teams} actions={[{ icon: <Create />, handle: handleOpenModalModify, id: 'modify' }]} deleteAction={handleDelete} />
         </div>
       </div>
 
-      <div className='admin-teams_modal'>
+      <div>
         {isModalAddVisible && (
-          <AddTeamModal onClose={handleCloseModalAdd} onSubmit={handleAddTeamSubmit} />
+          <CreateTeamModal onClose={handleCloseModalAdd} onSubmit={handleAddTeamSubmit} />
         )}
         {Object.keys(teamToModify).length > 0 && (
           <ModifyTeamModal 

@@ -1,17 +1,17 @@
 #app-not-found {
   padding: 32px 16px;
 
-  .app-not-found_img-container {
+  &_img-container {
     width: 90%;
     max-width: 650px;
-    margin: auto;
+    margin: 32px auto 0 auto;
 
     img {
       width: 100%;
     }
   }
 
-  #app-not-found_back {
+  &_back {
     margin-left: auto;
   }
 }

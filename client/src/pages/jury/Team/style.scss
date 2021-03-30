@@ -1,7 +1,7 @@
 #app-jury_team {
   padding: 16px;
 
-  .app-jury_team-content {
+  &-content {
     margin: auto;
     max-width: 580px;
 
@@ -9,7 +9,7 @@
       padding: 8px 16px;
     }
 
-    #app-jury_team_longueur {
+    &_data-longueur {
       padding-bottom: 16px;
 
       .data {
@@ -26,7 +26,7 @@
       }
     }
 
-    #app-jury_team-controls {
+    &_controls {
       margin-top: 32px;
       text-align: center;
 

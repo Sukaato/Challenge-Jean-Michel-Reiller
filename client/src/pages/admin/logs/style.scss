@@ -1,16 +1,16 @@
-#admin-logs {
+#app-admin_logs {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
 
-  .admin-logs_title {
+  &-title {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
   }
 
-  .admin-logs_content {
+  &-content {
     flex-grow: 1;
     margin-top: 64px;
   }

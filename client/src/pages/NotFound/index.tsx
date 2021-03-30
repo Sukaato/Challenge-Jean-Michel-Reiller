@@ -1,6 +1,7 @@
 import { Button, Card, CardActions, CardContent, Container, Typography } from '@material-ui/core';
 import { ArrowBack } from '@material-ui/icons';
 import { useHistory } from 'react-router';
+import { JuryHeader } from '../../components/JuryHeader';
 import './style.scss';
 
 export function NotFound() {
@@ -11,6 +12,7 @@ export function NotFound() {
 
   return (
     <Container id='app-not-found'>
+      <JuryHeader title='Not Found' />
       <Card>
         <CardContent>
           <Typography variant='h2' component='h1'>Not Found</Typography>
@@ -22,7 +24,7 @@ export function NotFound() {
           </Button>
         </CardActions>
       </Card>
-      <div className='app-not-found_img-container'>
+      <div id='app-not-found_img-container'>
         <img src='/assets/img/piscine.svg' alt='piscine' />
       </div>
     </Container>
