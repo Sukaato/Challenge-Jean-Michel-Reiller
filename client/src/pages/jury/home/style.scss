@@ -1,6 +1,10 @@
 #app-jury_home {
   .app-jury_home-teams {
     margin-bottom: 12px;
+
+    &_text {
+      text-transform: capitalize;
+    }
   }
 }
 

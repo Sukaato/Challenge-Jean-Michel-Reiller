@@ -12,10 +12,15 @@
 
   &-content {
     flex-grow: 1;
-    display: grid;
-    margin-top: 48px;
+    display: flex;
+    flex-direction: column;
+    padding: 48px 0;
 
     &_card {
+      margin-top: 24px;
+      width: 100%;
+      flex-grow: 1;
+
       &-content {
         > div {
           margin-bottom: 36px;

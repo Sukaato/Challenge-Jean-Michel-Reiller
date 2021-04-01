@@ -1,5 +1,9 @@
 .app-jury_toolbar {
-  .app-jury_title {
-    margin-right: auto;
+  &-title {
+    text-transform: capitalize;
+  }
+
+  &-icon {
+    margin-left: auto;
   }
 }

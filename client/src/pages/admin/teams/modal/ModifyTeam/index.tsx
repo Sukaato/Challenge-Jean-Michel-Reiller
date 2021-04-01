@@ -1,39 +1,39 @@
 import { Button, Dialog, DialogTitle, FormControl, TextField } from '@material-ui/core';
 import { FC, useState } from 'react';
+import { socket } from '../../../../../shared/socket';
+import { Team } from '../../../../../shared/types/team.type';
 import './style.scss';
 
 
-interface TeamForm {
-  id: number;
-  name: string;
-  nagueurs: number;
-  objectif: number;
-}
+export type ModifyTeamForm = Pick<Team, 'id' | 'name' | 'swimmerCount' | 'objectif'>;
 
-interface ModifyTeamModalProps {
-  formData: TeamForm;
+interface Props {
+  data?: ModifyTeamForm;
   onClose: () => void;
-  onSubmit: (form: TeamForm) => void;
 }
 
-export const ModifyTeamModal: FC<ModifyTeamModalProps> = ({ formData, onClose, onSubmit }) => {
-  const [ name, setName ] = useState<string>(formData.name || '');
-  const [ nagueurs, setNagueurs ] = useState<number>(formData.nagueurs || 0);
-  const [ objectif, setObjectif ] = useState<number>(formData.objectif || 0);
+export const ModifyTeamModal: FC<Props> = ({ data, onClose }) => {
+  const [ name, setName ] = useState<string>(data?.name || '');
+  const [ swimmerCount, setSwimmerCount ] = useState<number>(data?.swimmerCount || 0);
+  const [ objectif, setObjectif ] = useState<number>(data?.objectif || 0);
 
   const handleNameChange = (value: string) => setName(value);
-  const handleNagueursChange = (value: number) => setNagueurs(value);
+  const handleSwimmerCountChange = (value: number) => setSwimmerCount(value);
   const handleObjectifChange = (value: number) => setObjectif(value);
 
   const handleClose = () => {
     setName('');
-    setNagueurs(0);
+    setSwimmerCount(0);
     setObjectif(0);
     onClose();
   }
   const handleFormSubmit = (e: any) => {
     e.preventDefault();
-    onSubmit({ id: formData.id, name, nagueurs, objectif });
+    console.log({
+      name, swimmerCount, objectif
+    });
+    
+    socket.emit('teams:modify', { id: data?.id, name, swimmerCount, objectif });
     handleClose();
   }
 
@@ -45,7 +45,7 @@ export const ModifyTeamModal: FC<ModifyTeamModalProps> = ({ formData, onClose, o
           <TextField value={name} onChange={e => handleNameChange(e.target.value)} label="Nom" variant='outlined' />
         </FormControl>
         <FormControl className='fields'>
-          <TextField value={nagueurs} type='number' onChange={e => handleNagueursChange(+e.target.value)} label='Nombre de nagueurs' variant='outlined' />
+          <TextField value={swimmerCount} type='number' onChange={e => handleSwimmerCountChange(+e.target.value)} label='Nombre de nagueurs' variant='outlined' />
         </FormControl>
         <FormControl className='fields'>
           <TextField value={objectif} type='number' onChange={e => handleObjectifChange(+e.target.value)} label='Objectif en mètres' variant='outlined' />

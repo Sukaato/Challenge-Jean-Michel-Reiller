@@ -1,18 +1,21 @@
 import { Container, IconButton, Paper, Typography } from '@material-ui/core';
 import { Add, Remove } from '@material-ui/icons';
-import { FC, useState } from 'react';
+import { FC, useContext, useEffect, useState } from 'react';
+import { useLocation } from 'react-router';
 import { JuryHeader } from '../../../components/JuryHeader';
+import { AppContext } from '../../../shared/context/AppContext';
+import { socket } from '../../../shared/socket';
+import { Team } from '../../../shared/types/team.type';
 import './style.scss';
 
-const data = {
-  id: 1,
-  name: 'team 1',
-  longueur: {
-    effectuer: 10,
-    bestTime: '2: 50.415',
-    lestTime: '2: 50.485',
-  },
-  objectif: 5000
+type PartialTeam = Pick<Team, 'id' | 'name' | 'lengths' | 'bestLengthsTime' | 'lastLengthsTime' | 'objectif'>;
+const data: PartialTeam = {
+  id: 'loading',
+  name: 'loading',
+  lengths: 0,
+  bestLengthsTime: '_',
+  lastLengthsTime: '_',
+  objectif: 0
 };
 
 function padStart(value: number): string {
@@ -20,59 +23,69 @@ function padStart(value: number): string {
 }
 
 export const JuryTeamPage: FC = () => {
-  const [ team, setTeam ] = useState<typeof data>(data);
-  const [ longueur ] = useState<number>(50);
+  const location = useLocation();
+  const context = useContext(AppContext);
+  const [ team, setTeam ] = useState<PartialTeam>(context.teams.find(team => location.pathname.endsWith(team.id)) || data);
+  const [ disableButton, setDisableButton ] = useState<boolean>(false);
 
-  const handleRemoveLongueur = () => setTeam(value => { 
-    if (value.longueur.effectuer === 0) return value;
+  const makeBottonDisabled = () => {
+    setDisableButton(true);
+    setTimeout(() => setDisableButton(false) ,3500);
+  }
 
-    return {
-      ...value, 
-      longueur: { ...value.longueur, effectuer: value.longueur.effectuer - 1 }
+  const handleRemoveLongueur = () => {
+    if (team.lengths > 0 && context.parameters.started) {
+      socket.emit('team:remove', { id: team.id });
+      makeBottonDisabled();
     }
-  });
-  const handleAddLongueur = () => setTeam(value => { 
-    return {
-      ...value, 
-      longueur: { ...value.longueur, effectuer: value.longueur.effectuer + 1 }
+  }
+  const handleAddLongueur = () => {
+    if (context.parameters.started) {
+      socket.emit('team:add', { id: team.id });
+      makeBottonDisabled();
     }
+  }
+
+  useEffect(() => {
+    socket.on('teams', (teams: Team[]) => setTeam(teams.find(team => location.pathname.endsWith(team.id)) || data));
   });
 
   return (
     <div id='app-jury_team'>
       <JuryHeader title={team.name} />
       <Container id='app-jury_team-content'>
+        <Typography variant='body1' component='p' style={{ fontSize: 18, paddingBottom: 12 }}>{context.timeleft}</Typography>
         <Paper elevation={2} className='padding'>
           <div id='app-jury_team-content_data-longueur'>
             <Typography variant='h5' component='h2'>Longueur</Typography>
             <div className='data padding'>
               <Typography variant='body1'>Nombre effectuer</Typography>
-              <Typography variant='body1'>{padStart(team.longueur.effectuer)}</Typography>
+              <Typography variant='body1'>{padStart(team.lengths)}</Typography>
             </div>
             <div className='data padding'>
               <Typography variant='body1'>Meilleur temps</Typography>
-              <Typography variant='body1'>{team.longueur.bestTime}</Typography>
+              <Typography variant='body1'>{team.bestLengthsTime}</Typography>
             </div>
             <div className='data padding'>
               <Typography variant='body1'>Dernier temps</Typography>
-              <Typography variant='body1'>{team.longueur.lestTime}</Typography>
+              <Typography variant='body1'>{team.lastLengthsTime}</Typography>
             </div>
           </div>
           <div>
             <Typography variant='h5' component='h2'>Objectif</Typography>
             <div className='data padding'>
-              <Typography variant='body1'>{team.objectif} m / {team.objectif / longueur} longueurs</Typography>
+              <Typography variant='body1'>{team.objectif} m / {team.objectif / context.parameters.piscineSize} longueurs</Typography>
             </div>
           </div>
         </Paper>
         <div id='app-jury_team-content_controls'>
           <Typography variant='h5' component='h2'>Gestion des longueurs</Typography>
           <div className='data'>
-            <IconButton onClick={handleRemoveLongueur}>
+            <IconButton onClick={handleRemoveLongueur} disabled={disableButton}>
               <Remove fontSize='large' />
             </IconButton>
-            <Typography variant='h5' component='h3'>{padStart(team.longueur.effectuer)}</Typography>
-            <IconButton onClick={handleAddLongueur}>
+            <Typography variant='h5' component='h3'>{padStart(team.lengths)}</Typography>
+            <IconButton onClick={handleAddLongueur} disabled={disableButton}>
               <Add fontSize='large' />
             </IconButton>
           </div>

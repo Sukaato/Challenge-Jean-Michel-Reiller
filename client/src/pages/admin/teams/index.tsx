@@ -1,43 +1,30 @@
 import { Breadcrumbs, Button, Link, Typography } from '@material-ui/core';
 import { Add, Create } from '@material-ui/icons';
-import { useEffect, useState } from 'react';
+import { FC, useContext, useEffect, useState } from 'react';
 import { Column, Row, SortableTable } from '../../../components/SortableTable';
+import { AppContext } from '../../../shared/context/AppContext';
+import { socket } from '../../../shared/socket';
+import { Team } from '../../../shared/types/team.type';
 import { CreateTeamModal } from './modal/CreateTeam';
-import { ModifyTeamModal } from './modal/ModifyTeam';
+import { ModifyTeamForm, ModifyTeamModal } from './modal/ModifyTeam';
 import './style.scss';
 
 const columns: Column[] = [
   { headerName: 'Nom',      field: 'name' },
-  { headerName: 'Nagueurs', field: 'nagueurs', align: 'right' },
+  { headerName: 'Nagueurs', field: 'swimmerCount', align: 'right' },
   { headerName: 'Objectif', field: 'objectif', align: 'right' }
 ];
 
-// TODO: Récupérer les valeurs dans l'api
-// TODO: Tester avec les bonnes valeurs
-const rows: Row[] = [
-  { id: 1, name: 'Team 1', nagueurs: 10, objectif: 5000 },
-  { id: 2, name: 'Team 2', nagueurs: 10, objectif: 5000 },
-  { id: 3, name: 'Team 3', nagueurs: 10, objectif: 5000 },
-  { id: 4, name: 'Team 4', nagueurs: 10, objectif: 5000 },
-];
-
-export function AdminTeamsPage () {
-  const [ teams, setTeams ] = useState<Row[]>(rows);
-
+export const AdminTeamsPage: FC = () => {
+  const context = useContext(AppContext);
   const [ isModalAddVisible, setIsModalAddVisible ] = useState<boolean>(false);
+  const [ teamToModify, setTeamToModify ] = useState<ModifyTeamForm>();
+
   const handleOpenModalAdd = () => setIsModalAddVisible(true);
   const handleCloseModalAdd = () => setIsModalAddVisible(false);
-  const handleAddTeamSubmit = (value: any) => setTeams(teams => [ ...teams, { id: teams.length + 1, ...value } ]);
-
-  const [ teamToModify, setTeamToModify ] = useState<Row>({});
-  const handleOpenModalModify = (data: Row) => setTeamToModify(data);
-  const handleCloseModalModify = () => {
-    setTeamToModify({});
-    handleCloseModalAdd();
-  };
-  const handleModifyTeamSubmit = (value: any) => setTeams(teams =>  teams.map(team => team.id !== value.id ? team : value));
-
-  const handleDelete = (row: Row) => setTeams(teams => teams.filter(team => team.id !== row.id));
+  const handleCloseModalModify = () => setTeamToModify(undefined);
+  const handleOpenModalModify = (value: ModifyTeamForm) => setTeamToModify(value);
+  const handleDelete = (row: Row) => socket.emit('teams:delete', { id: row.id });
 
   useEffect(() => {
     document.title = 'Équipes | Challenge';
@@ -54,26 +41,17 @@ export function AdminTeamsPage () {
           <Button variant='outlined' color='secondary' startIcon={<Add />} onClick={handleOpenModalAdd}>ajouter</Button>
         </div>
         <div>
-          <SortableTable columns={columns} rows={teams} actions={[{ icon: <Create />, handle: handleOpenModalModify, id: 'modify' }]} deleteAction={handleDelete} />
+          <SortableTable 
+            columns={columns} 
+            rows={context.teams} 
+            actions={[{ icon: <Create />, handle: (value: Row) => handleOpenModalModify(value as Team), id: 'modify' }]} 
+            deleteAction={handleDelete} noDefaultText />
         </div>
       </div>
 
       <div>
-        {isModalAddVisible && (
-          <CreateTeamModal onClose={handleCloseModalAdd} onSubmit={handleAddTeamSubmit} />
-        )}
-        {Object.keys(teamToModify).length > 0 && (
-          <ModifyTeamModal 
-            onClose={handleCloseModalModify} 
-            onSubmit={handleModifyTeamSubmit} 
-            formData={{ 
-              id: teamToModify.id, 
-              name: teamToModify.name, 
-              nagueurs: teamToModify.nagueurs, 
-              objectif: teamToModify.objectif 
-            }} 
-          />
-        )}
+        <CreateTeamModal open={isModalAddVisible} onClose={handleCloseModalAdd} />
+        {teamToModify && <ModifyTeamModal onClose={handleCloseModalModify} data={teamToModify} />}
       </div>
     </div>
   );

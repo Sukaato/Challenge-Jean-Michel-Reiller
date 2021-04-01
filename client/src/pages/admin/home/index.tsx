@@ -16,7 +16,7 @@ export function AdminHomePage () {
         <Typography variant='h3' component='h2'>Admin</Typography>
       </Breadcrumbs>
       <div id='app-admin_home-content'>
-        <Grid container lg={9} spacing={7} direction='row' justify='center' alignItems='center' className='grid'>
+        <Grid container spacing={7} direction='row' justify='center' alignItems='center' className='grid'>
           <Grid item md={5}>
             <AdminCard { ...appContent.tabs.results } />
           </Grid>

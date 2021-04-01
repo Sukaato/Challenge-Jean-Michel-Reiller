@@ -60,7 +60,7 @@ export const SortableTable: FC<Props> = ({ columns, rows, id, actions = [], dele
 
   return (
     <Paper elevation={2} id={id}>
-      <TableContainer>
+      <TableContainer style={{ maxHeight: '77vh' }}>
         <Table stickyHeader>
           <TableHead>
             <TableRow>
@@ -105,7 +105,7 @@ export const SortableTable: FC<Props> = ({ columns, rows, id, actions = [], dele
               {!noDefaultText && (
                 <TableRow>
                   <TableCell colSpan={columns.length + 1}>
-                    <Button color='secondary' href='/admin/teams' fullWidth>Ajouter une équipe</Button>
+                    <Button color='secondary' href='/teams' fullWidth>Ajouter une équipe</Button>
                   </TableCell>
                 </TableRow>
               )}
