@@ -1,0 +1,61 @@
+import { sessionTimerService } from './services/database_parameters.service';
+
+export class Timer {
+  private seconds: number;
+  private minutes: number;
+  private hours: number;
+  private interval: NodeJS.Timeout;
+  private callback: (timeleft: string) => void
+
+  constructor(callback: (timeleft: string) => void) {
+    this.callback = callback;
+    this.setup();
+  }
+
+  pause(): void {
+    clearInterval(this.interval);
+    sessionTimerService.pause();
+  }
+
+  start(): void {
+    this.interval = setInterval(() => this.countDown(), 1000);
+    sessionTimerService.resume();
+  }
+
+  parseToString(): string {
+    const { seconds, minutes, hours, padStart } = this;
+    return `Temps restant: ${padStart(hours)}h ${padStart(minutes)}m ${padStart(seconds)}s`;
+  }
+
+  private setup(): void {
+    sessionTimerService.createFromSessionTime(doc => {
+      this.seconds = doc.time.seconds ?? 0;
+      this.minutes = doc.time.minutes ?? 30;
+      this.hours = doc.time.hours ?? 1;
+      this.start();
+    });
+  }
+
+  private countDown(): void {
+    this.seconds = this.seconds - 1;
+    if (this.seconds < 0) {
+      this.seconds = 59;
+      this.minutes = this.minutes - 1;
+    }
+    if (this.minutes < 0) {
+      this.minutes = 59;
+
+      if (this.hours > 0) this.hours = this.hours - 1;
+    }
+    sessionTimerService.getDoc(doc => {
+      sessionTimerService.setDoc({ ...doc, time: { hours: this.hours, minutes: this.minutes, seconds: this.seconds }}, () => {
+        this.callback(this.parseToString());
+      });
+    });
+  }
+
+  private padStart(value: number): string {
+    return value.toString().padStart(2, '0');
+  }
+
+}

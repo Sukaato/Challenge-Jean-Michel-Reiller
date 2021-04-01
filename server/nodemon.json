@@ -1,0 +1,9 @@
+{
+    "watch": ["src/**/*ts"],
+    "ignore": ["src/**/*test.ts", "src/**/*.js", "src/**/*.map"],
+    "ext": "ts,json",
+    "env": {
+        "PORT": 80,
+        "NODE_ENV": "development"
+    }
+}
