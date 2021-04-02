@@ -1,4 +1,4 @@
-export type Team = {
+export type TeamDoc = {
   id: string;
   name: string;
   objectif: number;

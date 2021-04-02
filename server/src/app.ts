@@ -4,12 +4,12 @@ import express, { Application } from 'express';
 import helmet from 'helmet';
 import logger from 'morgan';
 import { Server as Io } from 'socket.io';
-import { piscineService, sessionService, sessionTimerService } from './services/database_parameters.service';
-import { addLengthsTeam, createTeam, deleteTeam, findTeams, removeLengthsTeam, setSelectedTeam, setStartNumberDateToTeams, updateTeam } from './services/database_teams.service';
 import { middleware } from './middlewares';
 import { routers } from './routes';
+import { piscineService, sessionService, sessionTimerService } from './services/parameters.service';
+import { teamService } from './services/teams.service';
 import { Timer } from './timer';
-import { CreateTeam, Team } from './types/Team.type';
+import { CreateTeam, TeamDoc } from './types/Team.type';
 
 const app: Application = express();
 const PORT = 3001;
@@ -52,7 +52,7 @@ const server = app.listen(PORT, () => {
 const io = new Io().listen(server, { cors: { origin: '*' }});
 
 const sendTeams = (): void => {
-  findTeams(teams => {
+  teamService.findAll(teams => {
     io.emit('teams', teams);
   });
 }
@@ -72,37 +72,37 @@ io.on('connection', async (socket) => {
   sendTeams();
 
   socket.on('teams:create', (data: CreateTeam) => {
-    createTeam(data, () => {
+    teamService.create(data, () => {
       sendTeams();
     });
   });
 
-  socket.on('teams:modify', (data: Team) => {
-    updateTeam(data, () => {
+  socket.on('teams:modify', (data: TeamDoc) => {
+    teamService.update(data, () => {
       sendTeams();
     });
   });
 
   socket.on('teams:delete', (data: { id: string}) => {
-    deleteTeam(data.id, () => {
+    teamService.delete(data.id, () => {
       sendTeams();
     });
   });
 
   socket.on('team:add', ({ id }) => {
-    addLengthsTeam(id, () => {
+    teamService.addLengths(id, () => {
       sendTeams();
     });
   });
 
   socket.on('team:remove', ({ id }) => {
-    removeLengthsTeam(id, () => {
+    teamService.removeLengths(id, () => {
       sendTeams();
     });
   });
 
   socket.on('team:select', ({ id }) => {
-    setSelectedTeam(id, () => {
+    teamService.setSelected(id, () => {
       sendTeams();
     });
   });
@@ -127,13 +127,13 @@ io.on('connection', async (socket) => {
     io.emit('parameters:started', started);
 
     if (started && !timer) {
-      setStartNumberDateToTeams(() => {
+      teamService.setLastEntry(() => {
         timer = new Timer(timeleft => {
           io.emit('timeleft', timeleft);
         });
       });
     } else if (started && timer) {
-      setStartNumberDateToTeams(() => {
+      teamService.setLastEntry(() => {
         timer.start();
       });
     } else if (!started && timer) {
@@ -147,11 +147,12 @@ io.on('connection', async (socket) => {
     console.log('[APP] parameters:reset -> on reset TOUT');
 
     if (timer) {
-      timer.pause();
+      timer.pause(() => {
+        sessionTimerService.delete(() => {
+          io.emit('parameters:started', false);
+          io.emit('timeleft', 'Temps restant: 00h 00m 00s');
+        });
+      });
     }
-    sessionTimerService.delete(() => {
-      io.emit('parameters:started', false);
-      io.emit('timeleft', 'Temps restant: 00h 00m 00s');
-    });
   });
 });

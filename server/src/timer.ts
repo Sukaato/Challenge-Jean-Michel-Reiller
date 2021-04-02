@@ -1,4 +1,5 @@
-import { sessionTimerService } from './services/database_parameters.service';
+import { sessionTimerService } from './services/parameters.service';
+import { VoidCallback } from './types/callback.type';
 
 export class Timer {
   private seconds: number;
@@ -12,9 +13,9 @@ export class Timer {
     this.setup();
   }
 
-  pause(): void {
+  pause(callback?: VoidCallback): void {
     clearInterval(this.interval);
-    sessionTimerService.pause();
+    sessionTimerService.pause(callback);
   }
 
   start(): void {
@@ -37,17 +38,21 @@ export class Timer {
   }
 
   private countDown(): void {
-    this.seconds = this.seconds - 1;
-    if (this.seconds < 0) {
-      this.seconds = 59;
-      this.minutes = this.minutes - 1;
-    }
-    if (this.minutes < 0) {
-      this.minutes = 59;
+    sessionTimerService.createFromSessionTime(doc => {
+      this.seconds = doc.time.seconds ?? 0;
+      this.minutes = doc.time.minutes ?? 30;
+      this.hours = doc.time.hours ?? 1;
 
-      if (this.hours > 0) this.hours = this.hours - 1;
-    }
-    sessionTimerService.getDoc(doc => {
+      this.seconds = this.seconds - 1;
+      if (this.seconds < 0) {
+        this.seconds = 59;
+        this.minutes = this.minutes - 1;
+      }
+      if (this.minutes < 0) {
+        this.minutes = 59;
+  
+        if (this.hours > 0) this.hours = this.hours - 1;
+      }
       sessionTimerService.setDoc({ ...doc, time: { hours: this.hours, minutes: this.minutes, seconds: this.seconds }}, () => {
         this.callback(this.parseToString());
       });

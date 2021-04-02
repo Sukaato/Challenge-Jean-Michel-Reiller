@@ -1,19 +1,12 @@
 import { db_params } from '../database/database';
+import { Callback, VoidCallback } from '../types/callback.type';
+import { PiscineDoc, SessionDoc, SessionTimer, SessionTimerDoc } from '../types/parameters.type';
 
-type callback<T> = (doc: T) => void;
-type voidCallback = () => void;
 
-
-/* Piscine service */
-interface PiscineDoc {
-  name: 'piscine';
-  size: number;
-  id: string;
-}
 
 class PiscineService {
 
-  getDoc(callback: callback<PiscineDoc>): void {
+  getDoc(callback: Callback<PiscineDoc>): void {
     db_params.find({ name: 'piscine' }, (err: any, docs: PiscineDoc[]) => {
       if (err) {
         console.error('[PiscineService]: getDoc ->', err);
@@ -23,7 +16,7 @@ class PiscineService {
     });
   }
 
-  setSize(size: number, callback: callback<PiscineDoc>): void {
+  setSize(size: number, callback: Callback<PiscineDoc>): void {
     this.getDoc(doc => {
       if (doc) {
         db_params.put(doc.id, { ...doc, size }, (err: any) => {
@@ -48,16 +41,10 @@ class PiscineService {
 export const piscineService = new PiscineService();
 
 
-/* session service */
-interface SessionDoc {
-  name: 'session';
-  time: string;
-  id?: string;
-}
 
 class SessionService {
 
-  getDoc(callback: callback<SessionDoc>): void {
+  getDoc(callback: Callback<SessionDoc>): void {
     db_params.find({ name: 'session' }, (err: any, docs: SessionDoc[]) => {
       if (err) {
         console.error('[SessionService] getDoc ->', err);
@@ -67,7 +54,7 @@ class SessionService {
     });
   }
 
-  setTime(time: string, callback: callback<SessionDoc>): void {
+  setTime(time: string, callback: Callback<SessionDoc>): void {
     this.getDoc(doc => {
       if (doc) {
         db_params.put(doc.id, { ...doc, time }, (err: any) => {
@@ -93,23 +80,10 @@ class SessionService {
 export const sessionService = new SessionService();
 
 
-/* Timer current session service */
-interface SessionTimer {
-  name: 'sessionTimer';
-  time: {
-    hours: number;
-    minutes: number;
-    seconds: number;
-  },
-  paused: boolean;
-}
-interface SessionTimerDoc extends SessionTimer {
-  id: string;
-}
 
 class SessionTimerService {
 
-  getDoc(callback: callback<SessionTimerDoc>): void {
+  getDoc(callback: Callback<SessionTimerDoc>): void {
     db_params.find({ name: 'sessionTimer' }, (err: any, docs: SessionTimerDoc[]) => {
       if (err) {
         console.error('[SessionTimerService] getDoc ->', err);
@@ -126,7 +100,7 @@ class SessionTimerService {
     return hasDoc;
   }
 
-  create(timer: SessionTimer, callback?: callback<SessionTimerDoc>): void {
+  create(timer: SessionTimer, callback?: Callback<SessionTimerDoc>): void {
     this.getDoc(doc => {
       if (doc) return doc;
 
@@ -140,7 +114,7 @@ class SessionTimerService {
     });
   }
 
-  createFromSessionTime(callback?: callback<SessionTimerDoc>): void {
+  createFromSessionTime(callback?: Callback<SessionTimerDoc>): void {
     this.getDoc(doc => {
       if (doc) {
         callback && callback(doc);
@@ -154,7 +128,7 @@ class SessionTimerService {
     });
   }
 
-  setDoc(timer: SessionTimerDoc, callback?: callback<SessionTimerDoc>): void {
+  setDoc(timer: SessionTimerDoc, callback?: Callback<SessionTimerDoc>): void {
     db_params.put(timer.id, { ...timer }, (err: any) => {
       if (err) {
         console.error('[SessionTimerService] setDoc ->', err);
@@ -164,7 +138,7 @@ class SessionTimerService {
     });
   }
 
-  pause(callback?: voidCallback): void {
+  pause(callback?: VoidCallback): void {
     this.createFromSessionTime(doc => {
       db_params.put(doc.id, { ...doc, paused: true }, (err: any) => {
         if (err) {
@@ -176,7 +150,7 @@ class SessionTimerService {
     });
   }
 
-  resume(callback?: voidCallback): void {
+  resume(callback?: VoidCallback): void {
     this.createFromSessionTime(doc => {
       db_params.put(doc.id, { ...doc, paused: false }, (err: any) => {
         if (err) {
@@ -188,7 +162,7 @@ class SessionTimerService {
     });
   }
 
-  delete(callback: voidCallback): void {
+  delete(callback: VoidCallback): void {
     this.getDoc(doc => {
       if (doc) {
         db_params.delete(doc.id, (err: any) => {
