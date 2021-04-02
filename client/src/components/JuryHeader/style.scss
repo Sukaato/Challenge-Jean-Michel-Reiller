@@ -1,4 +1,11 @@
 .app-jury_toolbar {
+  img {
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    margin-right: 8px;
+  }
+
   &-title {
     text-transform: capitalize;
   }

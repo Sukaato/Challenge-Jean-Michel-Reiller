@@ -13,10 +13,11 @@ export const JuryHeader: FC<Props> = ({ title }) => {
     <>
       <AppBar className='app-jury_toolbar'>
         <Toolbar>
+          <img src='assets/img/logo64.png' alt='logo' />
           <Typography variant='h6' className='app-jury_toolbar-title'>{title}</Typography>
           <a href='https://github.com/Sukaato' target='_blank' rel='noreferrer' className='app-jury_toolbar-icon'>
             <IconButton>
-              <GitHub />
+              <GitHub fontSize='small' />
             </IconButton>
           </a>
         </Toolbar>
