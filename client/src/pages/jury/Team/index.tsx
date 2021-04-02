@@ -59,7 +59,7 @@ export const JuryTeamPage: FC = () => {
           <div id='app-jury_team-content_data-longueur'>
             <Typography variant='h5' component='h2'>Longueur</Typography>
             <div className='data padding'>
-              <Typography variant='body1'>Nombre effectuer</Typography>
+              <Typography variant='body1'>Nombre longueurs</Typography>
               <Typography variant='body1'>{padStart(team.lengths)}</Typography>
             </div>
             <div className='data padding'>

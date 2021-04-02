@@ -1,5 +1,5 @@
 export interface Log {
-  id: number;
+  id: string;
   message: string;
   level: 'info' | 'warn'
 }

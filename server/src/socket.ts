@@ -105,7 +105,6 @@ export class Socket {
   }
 
   private onDeleteLogs(id: string): void {
-    this.logger.debug(id);
     this.logger.deleteLogEntry(id);
   }
 
@@ -176,6 +175,11 @@ export class Socket {
         });
       });
     }
+  }
+
+  static onEnd(): void {
+    webSocket.emit('parameters:started', false);
+    webSocket.emit('timeleft', 'Session terminée !');
   }
 
   /* Other */

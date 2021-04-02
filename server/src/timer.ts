@@ -1,4 +1,5 @@
 import { sessionTimerService } from './services/parameters.service';
+import { Socket } from './socket';
 import { VoidCallback } from './types/callback.type';
 
 export class Timer {
@@ -54,6 +55,11 @@ export class Timer {
         if (this.hours > 0) this.hours = this.hours - 1;
       }
       sessionTimerService.setDoc({ ...doc, time: { hours: this.hours, minutes: this.minutes, seconds: this.seconds }}, () => {
+        if (this.hours === 0 && this.minutes === 0 && this.seconds === 0) {
+          this.pause();
+          Socket.onEnd();
+          return;
+        }
         this.callback(this.parseToString());
       });
     });

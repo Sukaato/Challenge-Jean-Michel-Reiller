@@ -38,7 +38,7 @@ export const JuryHomePage: FC = () => {
             ))}
           </List>
         </> : <>
-          <Typography variant='h5' component='p' id='app-jury_home-no-teams'>Aucun équipes</Typography>
+          <Typography variant='h5' component='p' id='app-jury_home-no-teams'>Aucune équipe</Typography>
         </>}
       </Container>
     </div>
