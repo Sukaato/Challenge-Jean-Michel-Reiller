@@ -29,6 +29,9 @@ export function AdminHomePage () {
           <Grid item md={5}>
             <AdminCard { ...appContent.tabs.logs } />
           </Grid>
+          <Grid item md={5}>
+            <AdminCard { ...appContent.tabs.contact } />
+          </Grid>
         </Grid>
       </div>
     </div>

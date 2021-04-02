@@ -1,4 +1,4 @@
-import { Equalizer, People, Settings, Storage } from '@material-ui/icons';
+import { DeveloperMode, Equalizer, People, Settings, Storage } from '@material-ui/icons';
 
 export const appContent = {
   tabs: {
@@ -25,6 +25,12 @@ export const appContent = {
       description: 'Consulter les actions des jurys',
       icon: <Storage />,
       redirectTo: '/logs'
+    },
+    contact: {
+      title: 'Contact',
+      description: 'Information du développeur',
+      icon: <DeveloperMode />,
+      redirectTo: '/contact'
     }
   }
 }

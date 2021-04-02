@@ -4,6 +4,7 @@ import { isDesktop } from 'react-device-detect';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { AdminDrawer } from '../components/AdminDrawer';
 import { WaterMark } from '../components/WaterMark';
+import { AdminContactPage } from '../pages/admin/contact';
 import { AdminHomePage } from '../pages/admin/home';
 import { AdminLogsPage } from '../pages/admin/logs';
 import { AdminResultsPage } from '../pages/admin/results';
@@ -82,6 +83,9 @@ export const App: FC = () => {
                   </Route>
                   <Route path='/logs' exact>
                     <AdminLogsPage />
+                  </Route>
+                  <Route path='/contact' exact>
+                    <AdminContactPage />
                   </Route>
                 </AdminDrawer>
               </Switch>

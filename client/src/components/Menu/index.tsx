@@ -28,6 +28,7 @@ export const Menu: FC<Props> = ({ isOpen, onPressClose }) => {
         <MenuItem { ...appContent.tabs.teams } />
         <MenuItem { ...appContent.tabs.settings } />
         <MenuItem { ...appContent.tabs.logs } />
+        <MenuItem { ...appContent.tabs.contact } />
       </List>
     </Drawer>
   );

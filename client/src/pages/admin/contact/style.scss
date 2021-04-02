@@ -1,0 +1,31 @@
+#app-admin_contact {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  &-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &-content {
+    flex-grow: 1;
+    margin-top: 16px;
+  }
+
+  &-card {
+    width: 460px;
+    padding: 16px;
+    margin: auto;
+
+    .infos {
+      display: flex;
+
+      .icons {
+        margin-right: 12px;
+      }
+    }
+  }
+}
