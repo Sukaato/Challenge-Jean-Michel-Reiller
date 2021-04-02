@@ -1,10 +1,11 @@
 import { db_teams } from '../database/database';
 import { Callback, VoidCallback } from '../types/callback.type';
 import { CreateTeam, TeamDoc } from '../types/Team.type';
+import { LoggerService } from './logger.service';
 import { piscineService } from './parameters.service';
 
 class TeamService {
-
+  private logger = new LoggerService(TeamService.name);
   private readonly base = { 
     lengths: 0, 
     totalDistance: 0,
@@ -21,7 +22,7 @@ class TeamService {
     const toSave = { ...this.base, ...team };
     db_teams.post(toSave, (err: any, id: string) => {
       if (err) {
-        console.error('[TeamService] create ->', err);
+        this.logger.error('create', err);
         return
       }
       callback({ ...toSave, id });
@@ -31,7 +32,7 @@ class TeamService {
   findAll(callback: Callback<TeamDoc[]>): void {
     db_teams.all((err: any, docs: TeamDoc[]) => {
       if (err) {
-        console.error('[TeamService] findAll ->', err);
+        this.logger.error('findAll', err);
         return
       }
       piscineService.getDoc(piscine => {
@@ -49,7 +50,7 @@ class TeamService {
   findOne(id: string, callback: Callback<TeamDoc>): void {
     db_teams.get(id, (err: any, doc: TeamDoc) => {
       if (err) {
-        console.error('[TeamService] findOne ->', err);
+        this.logger.error(`findOne with id: '${id}'`, err);
         return
       }
       callback(doc);
@@ -58,9 +59,9 @@ class TeamService {
 
   update(team: TeamDoc, callback?: VoidCallback): void {
     this.findOne(team.id, doc => {
-      db_teams.put(team.id, { ...doc, ...team }, (err: any, id: string) => {
+      db_teams.put(team.id, { ...doc, ...team }, (err: any) => {
         if (err) {
-          console.error('[TeamService] update ->', err);
+          this.logger.error(`update with id: '${team.id}'`, err);
           return
         }
         callback && callback();
@@ -71,7 +72,7 @@ class TeamService {
   delete(id: string, callback: VoidCallback): void {
     db_teams.delete(id, (err: any) => {
       if (err) {
-        console.error('[TeamService] delete ->', err);
+        this.logger.error(`delete with id: '${id}'`, err);
         return;
       }
       callback();
@@ -92,19 +93,21 @@ class TeamService {
         const lastEntryAt = Date.now();
         const lastLengthsTimeInNumber = lastEntryAt - team.lastEntryAt;
         const lastLengthsTime = this.parseMsToTime(lastLengthsTimeInNumber);
-  
+
         const bestLengthsTimeInNumber = team.bestLengthsTimeInNumber 
           ? lastLengthsTimeInNumber < team.bestLengthsTimeInNumber 
             ? lastLengthsTimeInNumber
             : team.bestLengthsTimeInNumber
           : lastLengthsTimeInNumber;
-  
+
         const bestLengthsTime = team.bestLengthsTimeInNumber 
           ? lastLengthsTimeInNumber < team.bestLengthsTimeInNumber 
             ? lastLengthsTime
             : team.bestLengthsTime
           : lastLengthsTime;
-  
+
+        this.logger.info(`Ajout d'une longueur sur la team: '${team.name}'`);
+
         this.update({ ...team, lengths, totalDistance, lastEntryAt, lastLengthsTime, lastLengthsTimeInNumber, bestLengthsTimeInNumber, bestLengthsTime }, callback);
       });
     });
@@ -112,7 +115,7 @@ class TeamService {
 
   removeLengths(id: string, callback: VoidCallback): void {
     this.findOne(id, team => {
-      console.warn('[TeamService] REMOVE ONE LENGHTS TO TEAM:', team.name);
+      this.logger.warn(`Supression d'une longueur sur la team: '${team.name}'`);
       piscineService.getDoc(piscineDoc => {
         const lengths = team.lengths - 1;
         const totalDistance = lengths * piscineDoc.size;
