@@ -5,7 +5,7 @@ import helmet from 'helmet';
 import logger from 'morgan';
 import { middleware } from './middlewares';
 import { routers } from './routes';
-import { Socket } from './socket';
+import { ServerSocket } from './socket';
 
 const app: Application = express();
 const PORT = 3001;
@@ -44,4 +44,4 @@ const server = app.listen(PORT, () => {
   console.log(`Server listening on http://localhost:${PORT}`);
 
 });
-new Socket(server);
+new ServerSocket(server);

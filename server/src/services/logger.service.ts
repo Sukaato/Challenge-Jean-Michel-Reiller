@@ -1,6 +1,6 @@
 import { Level, levels, Logger } from 'log4js';
 import { db_logs } from '../database/database';
-import { Socket } from '../socket';
+import { ServerSocket } from '../socket';
 import { Callback } from '../types/callback.type';
 import { LogDoc } from '../types/log.type';
 import { logger } from '../utils/logger';
@@ -34,7 +34,7 @@ export class LoggerService {
     db_logs.delete(id, (err: any) => {
       if (err) this.error(`Erreur lors de la suppression du logs: '${id}'`, err);
       this.findAllLog(logs => {
-        Socket.sendNewLog(logs);
+        ServerSocket.sendNewLog(logs);
       });
     });
   }
@@ -42,7 +42,7 @@ export class LoggerService {
   private makeLogEntry(message: string, level: Level): void {
     db_logs.post({ message, level: level.levelStr }, () => {
       this.findAllLog(logs => {
-        Socket.sendNewLog(logs);
+        ServerSocket.sendNewLog(logs);
       });
     });
   }

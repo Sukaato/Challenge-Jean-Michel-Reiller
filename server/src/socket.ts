@@ -1,5 +1,5 @@
 import { Server } from 'node:http';
-import { Server as Io } from 'socket.io';
+import { Server as SocketIo, Socket } from 'socket.io';
 import { DefaultEventsMap } from 'socket.io/dist/typed-events';
 import { LoggerService } from './services/logger.service';
 import { piscineService, sessionService, sessionTimerService } from './services/parameters.service';
@@ -8,14 +8,14 @@ import { Timer } from './timer';
 import { LogDoc } from './types/log.type';
 import { CreateTeam, TeamDoc } from './types/Team.type';
 
-let webSocket: Io<DefaultEventsMap, DefaultEventsMap>;;
+let webSocket: SocketIo<DefaultEventsMap, DefaultEventsMap>;;
 
-export class Socket {
-  private logger = new LoggerService(Socket.name);
+export class ServerSocket {
+  private logger = new LoggerService(ServerSocket.name);
   private timer: Timer;
 
   constructor(server: Server) {
-    webSocket = new Io(server, { cors: { origin: '*' }});
+    webSocket = new SocketIo(server, { cors: { origin: '*' }});
     this.connection();
     this.initParams();
   }
@@ -23,6 +23,7 @@ export class Socket {
   private connection() {
     webSocket.on('connection', socket => {
       socket.emit('connection', socket.id);
+      this.sendTeams(socket);
 
       /* Admin */
       socket.on('teams:create', (data: CreateTeam) => {
@@ -183,9 +184,13 @@ export class Socket {
   }
 
   /* Other */
-  private sendTeams() {
+  private sendTeams(socket?: Socket) {
     teamService.findAll(teams => {
-      webSocket.emit('teams', teams);
+      if (socket) {
+        socket.emit('team', teams);
+      } else {
+        webSocket.emit('teams', teams);
+      }
     });
   }
 
