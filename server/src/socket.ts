@@ -24,6 +24,7 @@ export class ServerSocket {
     webSocket.on('connection', socket => {
       socket.emit('connection', socket.id);
       this.sendTeams(socket);
+      this.initParams();
 
       /* Admin */
       socket.on('teams:create', (data: CreateTeam) => {
@@ -187,7 +188,7 @@ export class ServerSocket {
   private sendTeams(socket?: Socket) {
     teamService.findAll(teams => {
       if (socket) {
-        socket.emit('team', teams);
+        socket.emit('teams', teams);
       } else {
         webSocket.emit('teams', teams);
       }

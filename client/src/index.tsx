@@ -4,11 +4,15 @@ import { App } from './App';
 import reportWebVitals from './reportWebVitals';
 
 import './index.scss';
+import { theme } from './shared/mui-theme';
+import { ThemeProvider } from '@material-ui/styles';
 
 
 render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

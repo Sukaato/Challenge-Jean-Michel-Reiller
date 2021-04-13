@@ -1,4 +1,3 @@
-import { ThemeProvider } from '@material-ui/styles';
 import { FC, useEffect, useState } from 'react';
 import { isDesktop } from 'react-device-detect';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -14,7 +13,6 @@ import { JuryHomePage } from '../pages/jury/Home';
 import { JuryTeamPage } from '../pages/jury/Team';
 import { NotFound } from '../pages/NotFound';
 import { AppContext } from '../shared/context/AppContext';
-import { theme } from '../shared/mui-theme';
 import { socket } from '../shared/socket';
 import { Team } from '../shared/types/team.type';
 import './style.scss';
@@ -64,48 +62,46 @@ export const App: FC = () => {
           started
         }
       }}>
-        <ThemeProvider theme={theme}>
-          {isDesktop ? <>
-            <Router>
-              <Switch>
-                <AdminDrawer>
-                  <Route path='/' exact>
-                    <AdminHomePage />
-                  </Route>
-                  <Route path='/results' exact>
-                    <AdminResultsPage />
-                  </Route>
-                  <Route path='/teams' exact>
-                    <AdminTeamsPage />
-                  </Route>
-                  <Route path='/settings' exact>
-                    <AdminSettingsPage/>
-                  </Route>
-                  <Route path='/logs' exact>
-                    <AdminLogsPage />
-                  </Route>
-                  <Route path='/contact' exact>
-                    <AdminContactPage />
-                  </Route>
-                </AdminDrawer>
-              </Switch>
-            </Router>
-          </> : <>
-            <Router>
-              <Switch>
+        {isDesktop ? <>
+          <Router>
+            <Switch>
+              <AdminDrawer>
                 <Route path='/' exact>
-                    <JuryHomePage />
+                  <AdminHomePage />
                 </Route>
-                <Route path='/teams/:team' exact>
-                    <JuryTeamPage />
+                <Route path='/results' exact>
+                  <AdminResultsPage />
                 </Route>
-                <Route path='*'>
-                    <NotFound />
+                <Route path='/teams' exact>
+                  <AdminTeamsPage />
                 </Route>
-              </Switch>
-            </Router>
-          </>}
-        </ThemeProvider>
+                <Route path='/settings' exact>
+                  <AdminSettingsPage/>
+                </Route>
+                <Route path='/logs' exact>
+                  <AdminLogsPage />
+                </Route>
+                <Route path='/contact' exact>
+                  <AdminContactPage />
+                </Route>
+              </AdminDrawer>
+            </Switch>
+          </Router>
+        </> : <>
+          <Router>
+            <Switch>
+              <Route path='/' exact>
+                  <JuryHomePage />
+              </Route>
+              <Route path='/teams/:team' exact>
+                  <JuryTeamPage />
+              </Route>
+              <Route path='*'>
+                  <NotFound />
+              </Route>
+            </Switch>
+          </Router>
+        </>}
       </AppContext.Provider>
       <WaterMark />
     </>
