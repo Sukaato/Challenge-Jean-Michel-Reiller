@@ -1,5 +1,5 @@
-import { Breadcrumbs, Button, Link, Typography } from '@material-ui/core';
-import { Add, Create } from '@material-ui/icons';
+import { Breadcrumbs, Button, Link, Typography } from '@mui/material';
+import { Add, Create } from '@mui/icons-material';
 import { FC, useEffect, useState } from 'react';
 import { Column, Row, SortableTable } from '../../../components/SortableTable';
 import { AppContext } from '../../../shared/context/AppContext';

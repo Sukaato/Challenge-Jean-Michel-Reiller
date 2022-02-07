@@ -1,4 +1,4 @@
-import { Button, Dialog, DialogTitle, FormControl, TextField } from '@material-ui/core';
+import { Button, Dialog, DialogTitle, FormControl, TextField } from '@mui/material';
 import { FC, useState } from 'react';
 import { socket } from '../../../../../shared/socket';
 import { Team } from '../../../../../shared/types/team.type';

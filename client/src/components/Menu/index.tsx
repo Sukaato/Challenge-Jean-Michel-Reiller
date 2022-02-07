@@ -1,5 +1,5 @@
-import { Divider, Drawer, IconButton, List, Typography } from '@material-ui/core';
-import { ChevronLeft, ChevronRight } from '@material-ui/icons';
+import { Divider, Drawer, IconButton, List, Typography } from '@mui/material';
+import { ChevronLeft, ChevronRight } from '@mui/icons-material';
 import { FC } from 'react';
 import { appContent } from '../../shared/app-content';
 import { theme } from '../../shared/mui-theme';

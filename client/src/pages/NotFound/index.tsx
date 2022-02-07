@@ -1,5 +1,6 @@
-import { Button, Card, CardActions, CardContent, Container, Typography } from '@material-ui/core';
-import { ArrowBack } from '@material-ui/icons';
+
+import { ArrowBack } from '@mui/icons-material';
+import { Button, Card, CardActions, CardContent, Container, Typography } from '@mui/material';
 import { useHistory } from 'react-router';
 import { JuryHeader } from '../../components/JuryHeader';
 import './style.scss';

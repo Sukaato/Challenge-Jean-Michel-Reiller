@@ -1,5 +1,5 @@
-import { Backdrop, Breadcrumbs, Button, IconButton, Link, Paper, Typography } from '@material-ui/core';
-import { Close, Fullscreen } from '@material-ui/icons';
+import { Backdrop, Breadcrumbs, Button, IconButton, Link, Paper, Typography } from '@mui/material';
+import { Close, Fullscreen } from '@mui/icons-material';
 import { FC, useEffect, useState } from 'react';
 import { Column, SortableTable } from '../../../components/SortableTable';
 import { AppContext } from '../../../shared/context/AppContext';

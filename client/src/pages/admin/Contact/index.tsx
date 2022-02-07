@@ -1,5 +1,6 @@
-import { Breadcrumbs, Card, CardContent, Container, Link, Typography } from '@material-ui/core';
-import { Email, Smartphone } from '@material-ui/icons';
+
+import { Email, Smartphone } from '@mui/icons-material';
+import { Breadcrumbs, Card, CardContent, Container, Link, Typography } from '@mui/material';
 import { FC } from 'react';
 import './style.scss';
 

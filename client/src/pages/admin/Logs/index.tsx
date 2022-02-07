@@ -1,4 +1,4 @@
-import { Breadcrumbs, Link, Typography } from '@material-ui/core';
+import { Breadcrumbs, Link, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { Column, SortableTable } from '../../../components/SortableTable';
 import { socket } from '../../../shared/socket';

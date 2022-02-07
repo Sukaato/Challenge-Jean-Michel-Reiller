@@ -1,4 +1,4 @@
-import { Breadcrumbs, Button, Card, CardContent, FormControlLabel, Link, Switch, TextField, Typography } from '@material-ui/core';
+import { Breadcrumbs, Button, Card, CardContent, FormControlLabel, Link, Switch, TextField, Typography } from '@mui/material';
 import { FC, useEffect } from 'react';
 import { AppContext } from '../../../shared/context/AppContext';
 import { socket } from '../../../shared/socket';

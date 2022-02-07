@@ -1,4 +1,4 @@
 echo off
 
 cd ..
-npm i
+npm ci

@@ -1,4 +1,4 @@
-import { Breadcrumbs, Grid, Typography } from '@material-ui/core';
+import { Breadcrumbs, Grid, Typography } from '@mui/material';
 import { useEffect } from 'react';
 import { AdminCard } from '../../../components/AdminCard';
 import { appContent } from '../../../shared/app-content';
@@ -16,7 +16,7 @@ export function AdminHomePage () {
         <Typography variant='h3' component='h2'>Admin</Typography>
       </Breadcrumbs>
       <div id='app-admin_home-content'>
-        <Grid container spacing={7} direction='row' justify='center' alignItems='center' className='grid'>
+        <Grid container spacing={7}>
           <Grid item md={5}>
             <AdminCard { ...appContent.tabs.results } />
           </Grid>

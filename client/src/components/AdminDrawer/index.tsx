@@ -1,4 +1,4 @@
-import { Container } from '@material-ui/core';
+import { Container } from '@mui/material';
 import { FC, useState } from 'react';
 import { AdminHeader } from '../AdminHeader';
 import { Menu } from '../Menu';

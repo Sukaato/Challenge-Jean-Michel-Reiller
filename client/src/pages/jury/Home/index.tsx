@@ -1,6 +1,6 @@
-import { Container, List, ListItem, ListItemText, Paper, Typography } from '@material-ui/core';
+import { Container, List, ListItem, ListItemText, Paper, Typography } from '@mui/material';
 import { FC, useState } from 'react';
-import { Redirect } from 'react-router';
+import { Redirect } from 'react-router-dom';
 import { JuryHeader } from '../../../components/JuryHeader';
 import { AppContext } from '../../../shared/context/AppContext';
 import { socket } from '../../../shared/socket';

@@ -1,5 +1,5 @@
-import { Container, IconButton, Paper, Typography } from '@material-ui/core';
-import { Add, Remove } from '@material-ui/icons';
+import { Add, Remove } from '@mui/icons-material';
+import { Container, IconButton, Paper, Typography } from '@mui/material';
 import { FC, useState } from 'react';
 import { useLocation } from 'react-router';
 import { JuryHeader } from '../../../components/JuryHeader';

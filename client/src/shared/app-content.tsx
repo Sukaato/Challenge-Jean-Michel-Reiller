@@ -1,4 +1,4 @@
-import { DeveloperMode, Equalizer, People, Settings, Storage } from '@material-ui/icons';
+import { DeveloperMode, Equalizer, People, Settings, Storage } from '@mui/icons-material';
 
 export const appContent = {
   tabs: {

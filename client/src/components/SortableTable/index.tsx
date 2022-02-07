@@ -1,5 +1,5 @@
-import { Button, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from '@material-ui/core';
-import { Delete } from '@material-ui/icons';
+import { Button, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from '@mui/material';
+import { Delete } from '@mui/icons-material';
 import { FC, useState } from 'react';
 
 
@@ -114,16 +114,30 @@ export const SortableTable: FC<Props> = ({ columns, rows, id, actions = [], dele
           </TableBody>
         </Table>
       </TableContainer>
-      {rows && rows.length > 0 && <TablePagination 
-        labelRowsPerPage='Lignes par page:'
-        component='div'
-        page={page}
-        rowsPerPage={rowsPerPage}
-        rowsPerPageOptions={[10, 25]}
-        count={rows.length}
-        onChangePage={(e, value) => handleChangePage(value) }
-        onChangeRowsPerPage={(e) => handleChangeRowsPerPage(+e.target.value)}
-      />}
+      {/* {rows && rows.length > 0 && (
+        <TablePagination
+          labelRowsPerPage='Lignes par page:'
+          component='div'
+          page={page}
+          count={0}
+          rowsPerPage={rowsPerPage}
+          rowsPerPageOptions={[10, 25]}
+          count={rows.length}
+          onPageChange={(e, value) => handleChangePage(value) }
+          onChangeRowsPerPage={(e) => handleChangeRowsPerPage(+e.target.value)}
+        />
+      )} */}
+      {rows && rows.length > 0 && (
+        <TablePagination
+          labelRowsPerPage='Lignes par page:'
+          component='div'
+          page={page}
+          count={rows.length}
+          rowsPerPage={rowsPerPage}
+          onPageChange={(e, page) => handleChangePage(page) }
+          onRowsPerPageChange={(e) => handleChangeRowsPerPage(+e.target.value)}
+        />
+      )}
       
     </Paper>
   );

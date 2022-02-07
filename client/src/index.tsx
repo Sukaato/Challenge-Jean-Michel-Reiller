@@ -5,7 +5,7 @@ import reportWebVitals from './reportWebVitals';
 
 import './index.scss';
 import { theme } from './shared/mui-theme';
-import { ThemeProvider } from '@material-ui/styles';
+import { ThemeProvider } from '@mui/material';
 
 
 render(

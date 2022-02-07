@@ -1,5 +1,5 @@
-import { AppBar, IconButton, Toolbar, Typography } from '@material-ui/core';
-import { GitHub, Menu } from '@material-ui/icons';
+import { AppBar, IconButton, Toolbar, Typography } from '@mui/material';
+import { GitHub, Menu } from '@mui/icons-material';
 import { FC } from 'react';
 import './style.scss';
 
